@@ -1,6 +1,6 @@
 # http-codes.nvim
 
-Quickly investigate HTTP status codes with the help of [mozilla](https://developer.mozilla.org/en-US/docs/Web/HTTP), including [telescope](https://github.com/barrett-ruth/telescope-http.nvim/) and [fzf-lua](https://github.com/ibhagwan/fzf-lua) integrations.
+Quickly investigate HTTP status codes with the help of [mozilla](https://developer.mozilla.org/en-US/docs/Web/HTTP), including [telescope](https://github.com/barrett-ruth/telescope-http.nvim/), [fzf-lua](https://github.com/ibhagwan/fzf-lua) and [snacks.nvim](https://github.com/folke/snacks.nvim/blob/main/docs/picker.md) integrations.
 
 ## Installation
 
@@ -12,6 +12,7 @@ require('lazy').setup({
         'barrett-ruth/http-codes.nvim',
         config = true,
         -- or 'nvim-telescope/telescope.nvim'
+        -- or 'folke/snacks.nvim'
         dependencies = 'ibhagwan/fzf-lua'
         keys = { { '<leader>H', '<cmd>HTTPCodes<cr>' }}
     }

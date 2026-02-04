@@ -1,51 +1,46 @@
 # http-codes.nvim
 
-Quickly investigate HTTP status codes with the help of [mozilla](https://developer.mozilla.org/en-US/docs/Web/HTTP), including [telescope](https://github.com/barrett-ruth/telescope-http.nvim/) and [fzf-lua](https://github.com/ibhagwan/fzf-lua) integrations.
+Quickly investigate HTTP status codes with the help of [Mozilla](https://developer.mozilla.org/en-US/docs/Web/HTTP), with telescope and fzf-lua integrations.
 
 ## Installation
 
-Install via your favorite package manager, like [lazy](https://github.com/folke/lazy.nvim):
+Install using your package manager of choice or via [luarocks](https://luarocks.org/modules/barrettruth/http-codes.nvim):
 
-```lua
-require('lazy').setup({
-    {
-        'barrett-ruth/http-codes.nvim',
-        config = true,
-        -- or 'nvim-telescope/telescope.nvim'
-        dependencies = 'ibhagwan/fzf-lua'
-        keys = { { '<leader>H', '<cmd>HTTPCodes<cr>' }}
-    }
-})
+```
+luarocks install http-codes.nvim
 ```
 
-## [Configuration](./doc/http-codes.txt)
+## Dependencies
 
-`http-codes.nvim` uses telescope or fzf-lua (whichever you've installed), which can be manually overidden.
+One of:
+- [fzf-lua](https://github.com/ibhagwan/fzf-lua)
+- [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)
 
-`http-codes.nvim` opens the Mozilla documentation URLs based on your operating system. This can be overidden.
+## Configuration
 
-| OS      | open_url      |
-| ------- | ------------- |
-| Windows | `start %s`    |
-| OSX     | `open %s`     |
-| UNIX    | `xdg-open %s` |
+Configure via `vim.g.http_codes` before the plugin loads:
 
-See [the docs](./doc/http-codes.txt) for more information.
+```lua
+vim.g.http_codes = {
+  use = 'fzf-lua', -- or 'telescope', auto-detected by default
+  open_url = 'xdg-open %s', -- OS-specific by default
+}
+```
+
+| OS      | Default open_url |
+| ------- | ---------------- |
+| Windows | `start %s`       |
+| macOS   | `open %s`        |
+| Linux   | `xdg-open %s`    |
 
 ## Usage
 
-Use the exposed command in vimscript:
-
-```lua
+```vim
 :HTTPCodes
 ```
 
-or in lua:
+## Documentation
 
-```lua
-require('http-codes').http_codes()
+```vim
+:help http-codes.nvim
 ```
-
-## Migration
-
-If migrating from [telescope-http.nvim](https://github.com/barrett-ruth/telescope-http.nvim), follow the above instructions&mdash;no telescope-specific config is necessary.

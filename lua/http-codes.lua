@@ -24,19 +24,21 @@ local function init()
   if not config.use then
     if pcall(require, 'fzf-lua') then
       config.use = 'fzf-lua'
+    elseif pcall(require, 'snacks') then
+      config.use = 'snacks'
     elseif pcall(require, 'telescope') then
       config.use = 'telescope'
     end
   end
 
   if not config.use then
-    vim.notify_once('http-codes.nvim: install fzf-lua or telescope.nvim', vim.log.levels.ERROR)
+    vim.notify_once('http-codes.nvim: install fzf-lua, snacks.nvim, or telescope.nvim', vim.log.levels.ERROR)
     return false
   end
 
-  if not vim.tbl_contains({ 'fzf-lua', 'telescope' }, config.use) then
+  if not vim.tbl_contains({ 'fzf-lua', 'snacks', 'telescope' }, config.use) then
     vim.notify_once(
-      "http-codes.nvim: 'use' must be 'fzf-lua' or 'telescope'",
+      "http-codes.nvim: 'use' must be 'fzf-lua', 'snacks', or 'telescope'",
       vim.log.levels.ERROR
     )
     return false
@@ -59,6 +61,8 @@ function M.pick()
     require('telescope').extensions.http.list(config.open_url)
   elseif config.use == 'fzf-lua' then
     require('http-codes.fzf-lua').pick(config.open_url)
+  elseif config.use == 'snacks' then
+    require('http-codes.snacks').pick(config.open_url)
   end
 end
 

@@ -1,39 +1,42 @@
-http-codes                                                      *http-codes.txt*
+*http-codes* *http-codes.txt*
 
 Author: Barrett Ruth <https://barrettruth.com>
-Homepage: <https://github.com/barrettruth/http-codes.nvim>
+Homepage: <https://github.com/barrett-ruth/http-codes.nvim>
 
 ===============================================================================
 INTRODUCTION                                                 *http-codes.nvim*
 
-http-codes.nvim lets you quickly investigate HTTP status codes with Mozilla,
-supporting fzf-lua, snacks.nvim, and telescope.nvim.
+http-codes.nvim lets you quickly investigate HTTP status codes using Mozilla
+documentation, with telescope, fzf-lua, and snacks.nvim integrations.
 
 ===============================================================================
-CONFIGURATION                                              *http-codes.config*
+USAGE                                                            *:HTTPCodes*
 
-Configure via `vim.g.http_codes` before the plugin loads:
+>vim
+    :HTTPCodes
+<
+
+===============================================================================
+CONFIGURATION                                             *vim.g.http_codes*
+
+Configure via `vim.g.http_codes`:
+
 >lua
     vim.g.http_codes = {
+        -- Picker: 'fzf-lua', 'snacks', or 'telescope' (auto-detected)
         use = 'fzf-lua',
+        -- Command to open URLs (OS-specific by default)
         open_url = 'xdg-open %s',
     }
 <
-Options: ~
 
-    {use}       `(string|nil)`: Picker to use: 'fzf-lua', 'snacks', or
-                              'telescope'. Auto-detected if not specified.
+Default `open_url` by operating system:
 
-    {open_url}  `(string|nil)`: Command to open URLs. Uses `%s` as placeholder.
-                              Defaults based on OS:
-                              - Linux: 'xdg-open %s'
-                              - macOS: 'open %s'
-                              - Windows: 'start %s'
-
-===============================================================================
-COMMANDS                                                 *http-codes.commands*
-
-:HTTPCodes            Browse HTTP codes using the configured picker.
+    OS          Default
+    --------    ---------------
+    Windows     start %s
+    macOS       open %s
+    Linux       xdg-open %s
 
 -------------------------------------------------------------------------------
-vim:tw=80:ft=help:
+vim:tw=80:ts=8:ft=help:

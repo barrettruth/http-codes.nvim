@@ -14,6 +14,7 @@ luarocks install http-codes.nvim
 ## Dependencies
 
 One of:
+
 - [fzf-lua](https://github.com/ibhagwan/fzf-lua)
 - [snacks.nvim](https://github.com/folke/snacks.nvim)
 - [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)

@@ -1,38 +1,35 @@
-http-codes *http-codes.txt*
+http-codes                                                      *http-codes.txt*
 
 Author: Barrett Ruth <https://barrettruth.com>
-Homepage: <https://github.com/barrett-ruth/http-codes.nvim>
+Homepage: <https://github.com/barrettruth/http-codes.nvim>
 
 ===============================================================================
 INTRODUCTION                                                 *http-codes.nvim*
 
-https-codes.nvim lets you quickly investigate HTTP status codes with mozilla,
+http-codes.nvim lets you quickly investigate HTTP status codes with Mozilla,
 supporting fzf-lua and telescope.nvim.
 
-Author: Barrett Ruth <https://barrettruth.com>
-
 ===============================================================================
-SETUP                                                     *http-codes.setup()*
->lua
-    require('http-codes').setup(config)
-<
-Parameters: ~
+CONFIGURATION                                              *http-codes.config*
 
-    {config} `(table)`: table containing configuration for http-codes.
-                      Defaults shown below.
-
-Usage: ~
+Configure via `vim.g.http_codes` before the plugin loads:
 >lua
-    require('http-codes').setup({
-        -- defaults to available picker: 'fzf-lua' or 'telescope'
-        use = 'fzf-lua'
-        -- How the mozilla url is opened.
-        -- Configured by default based on OS:
-        open_url = 'xdg-open %s' -- UNIX
-              -- = 'open %s'     -- OSX
-              -- = 'start %s'    -- Windows
-    })
+    vim.g.http_codes = {
+        use = 'fzf-lua',
+        open_url = 'xdg-open %s',
+    }
 <
+Options: ~
+
+    {use}       `(string|nil)`: Picker to use: 'fzf-lua' or 'telescope'.
+                              Auto-detected if not specified.
+
+    {open_url}  `(string|nil)`: Command to open URLs. Uses `%s` as placeholder.
+                              Defaults based on OS:
+                              - Linux: 'xdg-open %s'
+                              - macOS: 'open %s'
+                              - Windows: 'start %s'
+
 ===============================================================================
 COMMANDS                                                 *http-codes.commands*
 

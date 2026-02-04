@@ -1,7 +1,7 @@
 local codes = require('http-codes.codes')
 local cached_items = nil
 
-local function codes_to_snack_items(codes)
+local function codes_to_snack_items(codes_map)
   if cached_items then
     return cached_items
   end
@@ -9,7 +9,7 @@ local function codes_to_snack_items(codes)
   local items = {}
 
   local idx = 1
-  for status, _ in pairs(codes) do
+  for status, _ in pairs(codes_map) do
     table.insert(items, { idx = idx, text = status })
     idx = idx + 1
   end

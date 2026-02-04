@@ -1,0 +1,4 @@
+doc/tags
+.*cache*
+CLAUDE.md
+.claude/

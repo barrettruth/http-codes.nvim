@@ -70,7 +70,10 @@ M.http_codes = M.pick
 
 ---@deprecated Use `vim.g.http_codes` instead
 function M.setup(user_config)
-  vim.deprecate('require("http-codes").setup()', 'vim.g.http_codes', '2.0.0', 'http-codes.nvim')
+  vim.notify_once(
+    'http-codes.nvim: setup() is deprecated. Use vim.g.http_codes instead.',
+    vim.log.levels.WARN
+  )
 
   if user_config then
     vim.g.http_codes = vim.tbl_deep_extend('force', vim.g.http_codes or {}, user_config)

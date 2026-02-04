@@ -1,49 +1,67 @@
 local M = {}
 
-local open_url = require('http-codes.os').get_open_url()
+local initialized = false
 
-M.config = {
-    use = nil,
-    open_url = open_url,
+local defaults = {
+  use = nil,
+  open_url = nil,
 }
 
-M.http_codes = function()
-    if M.config.use == 'telescope' then
-        require('telescope').extensions.http.list(M.config.open_url)
-    elseif M.config.use == 'fzf-lua' then
-        require('http-codes.fzf-lua').pick(M.config.open_url)
-    end
-end
+local config = vim.deepcopy(defaults)
 
-M.setup = function(user_config)
+local function init()
+  if initialized then
+    return true
+  end
+
+  local user_config = vim.g.http_codes or {}
+  config = vim.tbl_deep_extend('force', defaults, user_config)
+
+  if not config.open_url then
+    config.open_url = require('http-codes.os').get_open_url()
+  end
+
+  if not config.use then
     if pcall(require, 'fzf-lua') then
-        M.config.use = 'fzf-lua'
+      config.use = 'fzf-lua'
     elseif pcall(require, 'telescope') then
-        M.config.use = 'telescope'
+      config.use = 'telescope'
     end
+  end
 
-    if M.config.use == nil then
-        vim.notify_once 'http-codes.nvim: install fzf-lua or telescope.nvim'
-        return
-    end
+  if not config.use then
+    vim.notify_once('http-codes.nvim: install fzf-lua or telescope.nvim', vim.log.levels.ERROR)
+    return false
+  end
 
-    if user_config.use then M.config.use = user_config.use end
+  if not vim.tbl_contains({ 'fzf-lua', 'telescope' }, config.use) then
+    vim.notify_once(
+      "http-codes.nvim: 'use' must be 'fzf-lua' or 'telescope'",
+      vim.log.levels.ERROR
+    )
+    return false
+  end
 
-    if not vim.tbl_contains({ 'fzf-lua', 'telescope' }, M.config.use) then
-        vim.notify_once(
-            'http-codes.nvim: must specify `use = {fzf-lua,telescope}` in setup.',
-            vim.log.levels.ERROR
-        )
-        return
-    end
+  if config.use == 'telescope' then
+    require('http-codes.telescope').setup()
+  end
 
-    M.config = vim.tbl_deep_extend('force', M.config, user_config)
-
-    if M.config.use == 'telescope' then
-        require('http-codes.telescope').setup()
-    end
-
-    vim.api.nvim_create_user_command('HTTPCodes', M.http_codes, {})
+  initialized = true
+  return true
 end
+
+function M.pick()
+  if not init() then
+    return
+  end
+
+  if config.use == 'telescope' then
+    require('telescope').extensions.http.list(config.open_url)
+  elseif config.use == 'fzf-lua' then
+    require('http-codes.fzf-lua').pick(config.open_url)
+  end
+end
+
+M.http_codes = M.pick
 
 return M

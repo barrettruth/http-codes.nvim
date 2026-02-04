@@ -32,7 +32,10 @@ local function init()
   end
 
   if not config.use then
-    vim.notify_once('http-codes.nvim: install fzf-lua, snacks.nvim, or telescope.nvim', vim.log.levels.ERROR)
+    vim.notify_once(
+      'http-codes.nvim: install fzf-lua, snacks.nvim, or telescope.nvim',
+      vim.log.levels.ERROR
+    )
     return false
   end
 
@@ -70,7 +73,13 @@ M.http_codes = M.pick
 
 ---@deprecated Use `vim.g.http_codes` instead
 function M.setup(user_config)
-  vim.deprecate('require("http-codes").setup()', 'vim.g.http_codes', 'v0.1.0', 'http-codes.nvim', false)
+  vim.deprecate(
+    'require("http-codes").setup()',
+    'vim.g.http_codes',
+    'v0.1.0',
+    'http-codes.nvim',
+    false
+  )
 
   if user_config then
     vim.g.http_codes = vim.tbl_deep_extend('force', vim.g.http_codes or {}, user_config)

@@ -7,8 +7,7 @@ body:
     attributes:
       label: Prerequisites
       options:
-        - label:
-            I have searched [existing
+        - label: I have searched [existing
             issues](https://github.com/barrettruth/http-codes.nvim/issues)
           required: true
         - label: I have updated to the latest version

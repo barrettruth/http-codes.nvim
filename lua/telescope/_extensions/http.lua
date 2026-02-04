@@ -1,5 +1,5 @@
-local list = require 'telescope._extensions.http.list'
+local list = require('telescope._extensions.http.list')
 
-return require('telescope').register_extension {
-    exports = { list = list },
-}
+return require('telescope').register_extension({
+  exports = { list = list },
+})

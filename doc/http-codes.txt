@@ -17,6 +17,17 @@ USAGE                                                            *:HTTPCodes*
 <
 
 ===============================================================================
+MAPPINGS                                                *http-codes-mappings*
+
+                                                      *<Plug>(http-codes-pick)*
+<Plug>(http-codes-pick)     Open the HTTP status code picker.
+                            Equivalent to |:HTTPCodes|.
+
+Example configuration: >lua
+    vim.keymap.set('n', '<leader>hc', '<Plug>(http-codes-pick)')
+<
+
+===============================================================================
 CONFIGURATION                                             *vim.g.http_codes*
 
 Configure via `vim.g.http_codes`:

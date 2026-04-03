@@ -1,7 +1,7 @@
-*http-codes* *http-codes.txt*
+*http-codes* *http-codes.nvim.txt*
 
-Author: Barrett Ruth <https://barrettruth.com>
-Homepage: <https://github.com/barrett-ruth/http-codes.nvim>
+Author: Barrett Ruth <https://barrettruth.com> Homepage:
+<https://github.com/barrett-ruth/http-codes.nvim>
 
 ==============================================================================
 INTRODUCTION                                                 *http-codes.nvim*

@@ -1,8 +1,5 @@
 # http-codes.nvim
 
-> [!NOTE]
-> Issues and PRs at <https://git.barrettruth.com/barrettruth/http-codes.nvim>.
-
 Quickly investigate HTTP status codes with [Mozilla](https://developer.mozilla.org/en-US/docs/Web/HTTP), with telescope, fzf-lua, and snacks.nvim integrations.
 
 ## Installation

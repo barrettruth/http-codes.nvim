@@ -1,0 +1,19 @@
+name: luarocks
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  publish:
+    name: Publish to LuaRocks
+    runs-on: nix
+    steps:
+      - uses: actions/checkout@v4
+      - name: Publish to LuaRocks
+        env:
+          LUAROCKS_API_KEY: ${{ secrets.LUAROCKS_API_KEY }}
+        run: |
+          nix run --accept-flake-config \
+            github:nvim-neorocks/luarocks-tag-release#luarocks-tag-release-action

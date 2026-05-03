@@ -1,13 +1,25 @@
 *http-codes* *http-codes.nvim.txt*
 
 Author: Barrett Ruth <https://barrettruth.com> Homepage:
-<https://github.com/barrett-ruth/http-codes.nvim>
+<https://git.barrettruth.com/barrettruth/http-codes.nvim>
 
 ==============================================================================
 INTRODUCTION                                                 *http-codes.nvim*
 
 http-codes.nvim lets you quickly investigate HTTP status codes using Mozilla
 documentation, with telescope, fzf-lua, and snacks.nvim integrations.
+
+==============================================================================
+INSTALLATION                                       *http-codes-installation*
+
+With vim.pack (Neovim 0.12+): >lua
+    vim.pack.add({
+      'https://git.barrettruth.com/barrettruth/http-codes.nvim',
+    })
+<
+With luarocks: >sh
+    luarocks install http-codes.nvim
+<
 
 ==============================================================================
 USAGE                                                             *:HTTPCodes*

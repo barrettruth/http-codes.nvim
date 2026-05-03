@@ -4,8 +4,15 @@ Quickly investigate HTTP status codes with [Mozilla](https://developer.mozilla.o
 
 ## Installation
 
-Install with your package manager or via
-[luarocks](https://luarocks.org/modules/barrettruth/http-codes.nvim):
+With `vim.pack` (Neovim 0.12+):
+
+```lua
+vim.pack.add({
+  'https://git.barrettruth.com/barrettruth/http-codes.nvim',
+})
+```
+
+Or via [luarocks](https://luarocks.org/modules/barrettruth/http-codes.nvim):
 
 ```
 luarocks install http-codes.nvim

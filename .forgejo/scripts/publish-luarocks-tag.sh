@@ -103,9 +103,13 @@ for attempt in $(seq 1 18); do
   if luarocks install --tree "$tmpdir/remote" "$package" "$version"; then
     exit 0
   fi
-  echo "Waiting for LuaRocks root manifest to include ${package} ${rock_version} (attempt ${attempt}/18)."
+  rm -rf "$tmpdir/remote"
+  if luarocks install --tree "$tmpdir/remote" --server=https://luarocks.org/manifests/barrettruth "$package" "$version"; then
+    exit 0
+  fi
+  echo "Waiting for LuaRocks manifests to include ${package} ${rock_version} (attempt ${attempt}/18)."
   sleep 10
 done
 
-echo "Timed out waiting for LuaRocks root manifest to include ${package} ${rock_version}." >&2
+echo "Timed out waiting for LuaRocks manifests to include ${package} ${rock_version}." >&2
 exit 1

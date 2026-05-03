@@ -9,10 +9,31 @@ set -euo pipefail
 
 package="${GITHUB_REPOSITORY#*/}"
 repo_url="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}"
-sha="${GITHUB_SHA:?}"
-short_sha="$(git rev-parse --short=7 "$sha")"
-specrev="$(git rev-list --count "$sha")"
-rockspec="${package}-scm-${specrev}.rockspec"
+ref_name="${GITHUB_REF_NAME:-}"
+ref_type="${GITHUB_REF_TYPE:-}"
+
+case "${GITHUB_REF:-}" in
+  refs/tags/*)
+    ref_name="${GITHUB_REF#refs/tags/}"
+    ref_type="tag"
+    ;;
+esac
+
+if [ -z "$ref_name" ] || [ "$ref_type" != "tag" ]; then
+  echo "LuaRocks publish must run from a tag ref" >&2
+  exit 1
+fi
+
+version="${ref_name#v}"
+case "$version" in
+  ""|*[!0-9.]*)
+    echo "LuaRocks publish tag must be vX.Y.Z; got ${ref_name}" >&2
+    exit 1
+    ;;
+esac
+
+rock_version="${version}-1"
+rockspec="${package}-${rock_version}.rockspec"
 summary="$(sed -n "s/.*summary = '\([^']*\)'.*/\1/p" "${package}-scm-1.rockspec" | head -n 1)"
 
 if [ -z "$summary" ]; then
@@ -37,7 +58,7 @@ done
 cat >"$rockspec" <<EOF
 rockspec_format = '3.0'
 package = '$(lua_quote "$package")'
-version = 'scm-${specrev}'
+version = '$(lua_quote "$rock_version")'
 
 description = {
   summary = '$(lua_quote "$summary")',
@@ -50,7 +71,7 @@ dependencies = {
 }
 
 source = {
-  url = '$(lua_quote "$repo_url")/archive/${sha}.zip',
+  url = '$(lua_quote "$repo_url")/archive/$(lua_quote "$ref_name").zip',
   dir = '$(lua_quote "$package")',
 }
 
@@ -68,7 +89,7 @@ luarocks install --tree "$tmpdir/local" "$rockspec"
 if ! upload_output="$(luarocks upload "$rockspec" --api-key "$LUAROCKS_API_KEY" 2>&1)"; then
   if printf "%s\n" "$upload_output" | grep -qi "already exists"; then
     printf "%s\n" "$upload_output"
-    echo "LuaRocks nightly scm-${specrev} already exists for ${short_sha}; continuing."
+    echo "LuaRocks release ${rock_version} already exists; continuing."
   else
     printf "%s\n" "$upload_output" >&2
     exit 1
@@ -79,16 +100,12 @@ fi
 
 for attempt in $(seq 1 18); do
   rm -rf "$tmpdir/remote"
-  if luarocks install --tree "$tmpdir/remote" --server=https://luarocks.org/dev "$package" "scm-${specrev}"; then
+  if luarocks install --tree "$tmpdir/remote" "$package" "$version"; then
     exit 0
   fi
-  rm -rf "$tmpdir/remote"
-  if luarocks install --tree "$tmpdir/remote" --server=https://luarocks.org/manifests/barrettruth "$package" "scm-${specrev}"; then
-    exit 0
-  fi
-  echo "Waiting for LuaRocks manifests to include ${package} scm-${specrev} (attempt ${attempt}/18)."
+  echo "Waiting for LuaRocks root manifest to include ${package} ${rock_version} (attempt ${attempt}/18)."
   sleep 10
 done
 
-echo "Timed out waiting for LuaRocks manifests to include ${package} scm-${specrev}." >&2
+echo "Timed out waiting for LuaRocks root manifest to include ${package} ${rock_version}." >&2
 exit 1

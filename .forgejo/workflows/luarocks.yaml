@@ -69,43 +69,5 @@ jobs:
         env:
           LUAROCKS_API_KEY: ${{ secrets.LUAROCKS_API_KEY }}
         run: |
-          set -eu
-          package="${GITHUB_REPOSITORY#*/}"
-          ref_name="${GITHUB_REF_NAME:-}"
-          ref_type="${GITHUB_REF_TYPE:-}"
-
-          case "${GITHUB_REF:-}" in
-            refs/tags/*)
-              ref_name="${GITHUB_REF#refs/tags/}"
-              ref_type="tag"
-              ;;
-          esac
-
-          if [ -z "$ref_name" ] || [ "$ref_type" != "tag" ]; then
-            echo "LuaRocks publish must run from a tag ref" >&2
-            exit 1
-          fi
-
-          summary="$(sed -n "s/.*summary = '\([^']*\)'.*/\1/p" "$package-scm-1.rockspec" | head -n 1)"
-          if [ -z "$summary" ]; then
-            summary="$package"
-          fi
-
-          if [ -z "${GITHUB_EVENT_PATH:-}" ]; then
-            mkdir -p .forgejo/luarocks
-            printf '{}\n' > .forgejo/luarocks/event.json
-            export GITHUB_EVENT_PATH="$PWD/.forgejo/luarocks/event.json"
-          fi
-
-          export GITHUB_ACTION_PATH="$PWD"
-          export GITHUB_REF_NAME_OVERRIDE="$ref_name"
-          export GITHUB_REF_TYPE_OVERRIDE="$ref_type"
-          export INPUT_COPY_DIRECTORIES='{{ neovim.plugin.dirs }}'
-          export INPUT_LICENSE='GPL-3.0'
-          export INPUT_NAME="$package"
-          export INPUT_SUMMARY="$summary"
-          export INPUT_TEMPLATE="$PWD/.forgejo/luarocks/forgejo-rockspec.template"
-          export INPUT_VERSION="$ref_name"
-
-          nix run --accept-flake-config \
-            github:nvim-neorocks/luarocks-tag-release#luarocks-tag-release-action
+          nix shell nixpkgs#gnugrep nixpkgs#gnused nixpkgs#luarocks nixpkgs#zip nixpkgs#unzip -c \
+            bash .forgejo/scripts/publish-luarocks-tag.sh

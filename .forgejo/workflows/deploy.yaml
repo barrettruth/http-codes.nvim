@@ -9,7 +9,7 @@ on:
 
 jobs:
   publish:
-    name: ${{ forgejo.ref == 'refs/heads/main' && 'Nightly' || 'LuaRocks' }}
+    name: ${{ github.ref == 'refs/heads/main' && 'Nightly' || 'LuaRocks' }}
     runs-on: nix
     steps:
       - uses: actions/checkout@v4

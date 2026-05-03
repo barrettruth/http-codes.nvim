@@ -9,7 +9,7 @@ on:
 
 jobs:
   publish:
-    name: ${{ github.ref == 'refs/heads/main' && 'Nightly' || 'LuaRocks' }}
+    name: ${{ github.ref == 'refs/heads/main' && 'LuaRocks (nightly)' || 'LuaRocks' }}
     runs-on: nix
     steps:
       - uses: actions/checkout@v4

@@ -1,4 +1,4 @@
-name: luarocks
+name: deploy
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   publish:
-    name: Publish to LuaRocks
+    name: LuaRocks
     runs-on: nix
     steps:
       - uses: actions/checkout@v4

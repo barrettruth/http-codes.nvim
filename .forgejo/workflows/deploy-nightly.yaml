@@ -15,15 +15,10 @@ jobs:
           fetch-depth: 0
 
       - name: Wait for quality
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SERVER_URL: ${{ github.server_url }}
-          REPOSITORY: ${{ github.repository }}
-          SHA: ${{ github.sha }}
         run: nix shell nixpkgs#curl nixpkgs#jq -c bash .forgejo/scripts/wait-for-quality.sh
 
       - name: Compute LuaRocks specrev
-        run: echo "LUAROCKS_SPECREV=$(git rev-list --count "$GITHUB_SHA")" >> "$GITHUB_ENV"
+        run: echo "LUAROCKS_SPECREV=$(git rev-list --count "$FORGEJO_SHA")" >> "$FORGEJO_ENV"
 
       - name: Publish nightly LuaRocks
         uses: https://git.barrettruth.com/barrettruth/luarocks-tag-release-forgejo@v0.1.3

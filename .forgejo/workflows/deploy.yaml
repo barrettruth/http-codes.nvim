@@ -16,17 +16,12 @@ jobs:
 
       - name: Validate deploy ref
         run: |
-          if ! [[ "$GITHUB_REF" == refs/tags/v* ]]; then
-            echo "LuaRocks releases only run on v* tags; got $GITHUB_REF" >&2
+          if ! [[ "$FORGEJO_REF" == refs/tags/v* ]]; then
+            echo "LuaRocks releases only run on v* tags; got $FORGEJO_REF" >&2
             exit 1
           fi
 
       - name: Wait for quality
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SERVER_URL: ${{ github.server_url }}
-          REPOSITORY: ${{ github.repository }}
-          SHA: ${{ github.sha }}
         run: nix shell nixpkgs#curl nixpkgs#jq -c bash .forgejo/scripts/wait-for-quality.sh
 
       - name: Publish to LuaRocks

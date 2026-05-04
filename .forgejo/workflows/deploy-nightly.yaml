@@ -2,24 +2,17 @@ name: deploy
 
 on:
   push:
-    tags:
-      - 'v*'
+    branches: [main]
+  workflow_dispatch:
 
 jobs:
-  luarocks:
-    name: LuaRocks
+  luarocks-nightly:
+    name: LuaRocks (nightly)
     runs-on: nix
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      - name: Validate deploy ref
-        run: |
-          if ! [[ "$GITHUB_REF" == refs/tags/v* ]]; then
-            echo "LuaRocks releases only run on v* tags; got $GITHUB_REF" >&2
-            exit 1
-          fi
 
       - name: Wait for quality
         env:
@@ -29,12 +22,17 @@ jobs:
           SHA: ${{ github.sha }}
         run: nix shell nixpkgs#curl nixpkgs#jq -c bash .forgejo/scripts/wait-for-quality.sh
 
-      - name: Publish to LuaRocks
+      - name: Compute LuaRocks specrev
+        run: echo "LUAROCKS_SPECREV=$(git rev-list --count "$GITHUB_SHA")" >> "$GITHUB_ENV"
+
+      - name: Publish nightly LuaRocks
         uses: https://git.barrettruth.com/barrettruth/luarocks-tag-release-forgejo@v0.1.3
         env:
           LUAROCKS_API_KEY: ${{ secrets.LUAROCKS_API_KEY }}
         with:
+          version: scm
+          specrev: ${{ env.LUAROCKS_SPECREV }}
           license: GPL-3.0
           verification_servers: |
-            https://luarocks.org
             https://luarocks.org/manifests/barrettruth
+            https://luarocks.org/dev

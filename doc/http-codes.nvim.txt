@@ -21,6 +21,15 @@ With vim.pack (Neovim 0.12+): >lua
 <
 
 ==============================================================================
+FORGEJO                                              *http-codes.nvim-forgejo*
+
+Due to GitHub's historic unreliability, development, issues, and pull requests
+have moved to: >
+    https://git.barrettruth.com/barrettruth/http-codes.nvim
+<
+Use Forgejo for documentation, issues, pull requests, and active development.
+
+==============================================================================
 USAGE                                                             *:HTTPCodes*
 
 >vim

@@ -5,6 +5,7 @@ Quickly investigate HTTP status codes with [Mozilla](https://developer.mozilla.o
 > [!NOTE]
 > Due to GitHub's historic unreliability, development, issues, and pull requests
 > have moved to [Forgejo](https://git.barrettruth.com/barrettruth/http-codes.nvim).
+> See `:help http-codes.nvim-forgejo` for canonical project links.
 
 ## Installation
 

@@ -33,7 +33,7 @@ local function init()
 
   if not config.use then
     vim.notify_once(
-      'http-codes.nvim: install fzf-lua, snacks.nvim, or telescope.nvim',
+      '[http-codes]: install fzf-lua, snacks.nvim, or telescope.nvim',
       vim.log.levels.ERROR
     )
     return false
@@ -41,7 +41,7 @@ local function init()
 
   if not vim.tbl_contains({ 'fzf-lua', 'snacks', 'telescope' }, config.use) then
     vim.notify_once(
-      "http-codes.nvim: 'use' must be 'fzf-lua', 'snacks', or 'telescope'",
+      "[http-codes]: 'use' must be 'fzf-lua', 'snacks', or 'telescope'",
       vim.log.levels.ERROR
     )
     return false

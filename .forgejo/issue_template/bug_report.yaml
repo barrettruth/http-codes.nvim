@@ -8,7 +8,7 @@ body:
       label: Prerequisites
       options:
         - label: I have searched [existing
-            issues](https://github.com/barrettruth/http-codes.nvim/issues)
+            issues](https://git.barrettruth.com/barrettruth/http-codes.nvim/issues)
           required: true
         - label: I have updated to the latest version
           required: true
@@ -63,15 +63,8 @@ body:
         Confirm the bug reproduces with this config before submitting.
       render: lua
       value: |
-        vim.env.LAZY_STDPATH = '.repro'
-        load(vim.fn.system('curl -s https://raw.githubusercontent.com/folke/lazy.nvim/main/bootstrap.lua'))()
-        require('lazy.nvim').setup({
-          spec = {
-            {
-              'barrett-ruth/http-codes.nvim',
-              opts = {},
-            },
-          },
+        vim.pack.add({
+          'https://git.barrettruth.com/barrettruth/http-codes.nvim',
         })
     validations:
       required: true

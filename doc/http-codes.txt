@@ -1,7 +1,7 @@
 *http-codes.txt* *http-codes.nvim.txt* *http-codes*
 
 Author: Barrett Ruth <br@barrettruth.com> Homepage:
-<https://git.barrettruth.com/barrettruth/http-codes.nvim>
+<https://forge.barrettruth.com/barrettruth/http-codes.nvim>
 
 ==============================================================================
 INTRODUCTION                                                 *http-codes.nvim*
@@ -14,7 +14,7 @@ INSTALLATION                                         *http-codes-installation*
 
 With vim.pack (Neovim 0.12+): >lua
     vim.pack.add({
-      'https://git.barrettruth.com/barrettruth/http-codes.nvim',
+      'https://forge.barrettruth.com/barrettruth/http-codes.nvim',
     })
 < With luarocks: >sh
     luarocks install http-codes.nvim
@@ -25,7 +25,7 @@ FORGEJO                         *http-codes-forgejo* *http-codes.nvim-forgejo*
 
 Due to GitHub's historic unreliability, development, issues, and pull requests
 have moved to: >
-    https://git.barrettruth.com/barrettruth/http-codes.nvim
+    https://forge.barrettruth.com/barrettruth/http-codes.nvim
 <
 Use Forgejo for documentation, issues, pull requests, and active development.
 
@@ -37,7 +37,7 @@ UI to open:
 >lua
     vim.pack.add({
       'https://github.com/ibhagwan/fzf-lua',
-      'https://git.barrettruth.com/barrettruth/http-codes.nvim',
+      'https://forge.barrettruth.com/barrettruth/http-codes.nvim',
     })
 < Set the backend before http-codes.nvim loads if you want deterministic
 picker selection: >lua

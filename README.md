@@ -4,7 +4,7 @@ Quickly investigate HTTP status codes with [Mozilla](https://developer.mozilla.o
 
 > [!NOTE]
 > Due to GitHub's historic unreliability, active development is hosted on
-> [Forgejo](https://git.barrettruth.com/barrettruth/http-codes.nvim).
+> [Forgejo](https://forge.barrettruth.com/barrettruth/http-codes.nvim).
 > GitHub is maintained as a read-only mirror.
 > See `:help http-codes-forgejo` for canonical project links.
 
@@ -14,7 +14,7 @@ With `vim.pack` (Neovim 0.12+):
 
 ```lua
 vim.pack.add({
-  'https://git.barrettruth.com/barrettruth/http-codes.nvim',
+  'https://forge.barrettruth.com/barrettruth/http-codes.nvim',
 })
 ```
 
@@ -39,7 +39,7 @@ Install one picker backend first, then http-codes.nvim so the command has a UI t
 ```lua
 vim.pack.add({
   'https://github.com/ibhagwan/fzf-lua',
-  'https://git.barrettruth.com/barrettruth/http-codes.nvim',
+  'https://forge.barrettruth.com/barrettruth/http-codes.nvim',
 })
 ```
 

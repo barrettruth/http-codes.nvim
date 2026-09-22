@@ -3,6 +3,11 @@ package = 'http-codes.nvim'
 version = 'scm-1'
 
 source = { url = 'git+https://forge.barrettruth.com/barrettruth/http-codes.nvim.git' }
+
+description = {
+  license = 'GPL-3.0',
+}
+
 build = { type = 'builtin' }
 
 test_dependencies = {

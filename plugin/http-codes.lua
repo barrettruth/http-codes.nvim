@@ -3,6 +3,10 @@ if vim.g.loaded_http_codes then
 end
 vim.g.loaded_http_codes = 1
 
+pcall(function()
+  require('http-codes.migration').warn_if_github_source()
+end)
+
 vim.api.nvim_create_user_command('HTTPCodes', function()
   require('http-codes').pick()
 end, {})

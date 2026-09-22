@@ -2,10 +2,6 @@
 
 Quickly investigate HTTP status codes with [Mozilla](https://developer.mozilla.org/en-US/docs/Web/HTTP), with telescope, fzf-lua, and snacks.nvim integrations.
 
-> [!NOTE]
-> Active development is hosted on
-> [Forgejo](https://forge.barrettruth.com/barrettruth/http-codes.nvim).
-
 ## Installation
 
 With `vim.pack` (Neovim 0.12+):

@@ -16,12 +16,6 @@ vim.pack.add({
 })
 ```
 
-Or via [luarocks](https://luarocks.org/modules/barrettruth/http-codes.nvim):
-
-```
-luarocks install http-codes.nvim
-```
-
 ## Dependencies
 
 One of:

@@ -3,10 +3,8 @@
 Quickly investigate HTTP status codes with [Mozilla](https://developer.mozilla.org/en-US/docs/Web/HTTP), with telescope, fzf-lua, and snacks.nvim integrations.
 
 > [!NOTE]
-> Due to GitHub's historic unreliability, active development is hosted on
+> Active development is hosted on
 > [Forgejo](https://forge.barrettruth.com/barrettruth/http-codes.nvim).
-> GitHub is maintained as a read-only mirror.
-> See `:help http-codes-forgejo` for canonical project links.
 
 ## Installation
 

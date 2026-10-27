@@ -1,8 +1,5 @@
 # Contributing
 
-Development, issues, and pull requests happen on
-[Forgejo](https://forge.barrettruth.com/barrettruth/http-codes.nvim).
-
 ## Scope
 
 http-codes.nvim is a compact HTTP status code reference for Neovim pickers. It

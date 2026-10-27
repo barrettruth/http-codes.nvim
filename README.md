@@ -8,7 +8,7 @@ With `vim.pack` (Neovim 0.12+):
 
 ```lua
 vim.pack.add({
-  'https://forge.barrettruth.com/barrettruth/http-codes.nvim',
+  'https://github.com/barrettruth/http-codes.nvim',
 })
 ```
 
@@ -27,7 +27,7 @@ Install one picker backend first, then http-codes.nvim so the command has a UI t
 ```lua
 vim.pack.add({
   'https://github.com/ibhagwan/fzf-lua',
-  'https://forge.barrettruth.com/barrettruth/http-codes.nvim',
+  'https://github.com/barrettruth/http-codes.nvim',
 })
 ```
 

@@ -1,7 +1,7 @@
 *http-codes.txt* *http-codes.nvim.txt* *http-codes*
 
 Author: Barrett Ruth <br@barrettruth.com> Homepage:
-<https://forge.barrettruth.com/barrettruth/http-codes.nvim>
+<https://github.com/barrettruth/http-codes.nvim>
 
 ==============================================================================
 INTRODUCTION                                                 *http-codes.nvim*
@@ -14,15 +14,7 @@ INSTALLATION                                         *http-codes-installation*
 
 With vim.pack (Neovim 0.12+): >lua
     vim.pack.add({
-      'https://forge.barrettruth.com/barrettruth/http-codes.nvim',
-    })
-==============================================================================
-MIGRATION                   *http-codes-migration* *http-codes.nvim-migration*
-
-http-codes.nvim will be removed from GitHub on October 31, 2026. Update your
-plugin source to Forgejo: >lua
-    vim.pack.add({
-      'https://forge.barrettruth.com/barrettruth/http-codes.nvim',
+      'https://github.com/barrettruth/http-codes.nvim',
     })
 <
 
@@ -34,7 +26,7 @@ UI to open:
 >lua
     vim.pack.add({
       'https://github.com/ibhagwan/fzf-lua',
-      'https://forge.barrettruth.com/barrettruth/http-codes.nvim',
+      'https://github.com/barrettruth/http-codes.nvim',
     })
 < Set the backend before http-codes.nvim loads if you want deterministic
 picker selection: >lua
